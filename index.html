@@ -20,14 +20,24 @@
             ✨ Gerar Sugestão Inteligente
         </button>
         
-        <p class="text-[10px] text-gray-600 mt-4 text-center">MVP - Protótipo de interface visual</p>
+        <p class="text-[10px] text-gray-600 mt-4 text-center">Conectado ao Motor de Análise</p>
     </div>
 
     <script>
-        function gerarSugestao() {
-            const dezenas = Array.from({length: 80}, (_, i) => i + 1);
-            const sorteio = dezenas.sort(() => 0.5 - Math.random()).slice(0, 5).sort((a,b) => a - b);
-            document.getElementById('resultado').innerText = sorteio.join(' - ');
+        async function gerarSugestao() {
+            const resultadoDiv = document.getElementById('resultado');
+            resultadoDiv.innerText = "Buscando...";
+            
+            try {
+                // Link do seu servidor no Render
+                const resposta = await fetch('https://quina-prime.onrender.com/sugerir');
+                const dados = await resposta.json();
+                
+                resultadoDiv.innerText = dados.dezenas.join(' - ');
+            } catch (error) {
+                resultadoDiv.innerText = "Erro na conexão";
+                console.error("Erro ao buscar dados:", error);
+            }
         }
     </script>
 </body>
