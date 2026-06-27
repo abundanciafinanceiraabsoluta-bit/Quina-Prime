@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Quina Prime - MVP</title>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex items-center justify-center">
+    <div class="max-w-md w-full bg-gray-800 p-8 rounded-3xl shadow-2xl border border-gray-700">
+        <h1 class="text-3xl font-bold mb-2 text-emerald-400">Quina Prime</h1>
+        <p class="text-gray-400 mb-6 text-sm">Gerador Inteligente de Fechamentos</p>
+        
+        <div class="bg-black/30 p-6 rounded-2xl mb-6 text-center">
+            <p class="text-xs text-gray-500 uppercase mb-2">Dezenas Sugeridas</p>
+            <div id="resultado" class="text-3xl font-bold tracking-widest text-emerald-300">-- - -- - -- - -- - --</div>
+        </div>
+
+        <button onclick="gerarSugestao()" class="w-full bg-emerald-600 hover:bg-emerald-500 py-4 rounded-xl font-bold transition transform active:scale-95">
+            ✨ Gerar Sugestão Inteligente
+        </button>
+        
+        <p class="text-[10px] text-gray-600 mt-4 text-center">MVP - Protótipo de interface visual</p>
+    </div>
+
+    <script>
+        function gerarSugestao() {
+            const dezenas = Array.from({length: 80}, (_, i) => i + 1);
+            const sorteio = dezenas.sort(() => 0.5 - Math.random()).slice(0, 5).sort((a,b) => a - b);
+            document.getElementById('resultado').innerText = sorteio.join(' - ');
+        }
+    </script>
+</body>
+</html>
